@@ -4,27 +4,84 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
-
+   <link rel="stylesheet" type="text/css" href="css/icons.css" />
         <link rel="stylesheet"  href="libs/jQM-flat/jquery.mobile.flatui.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-
+   <link rel="stylesheet" type="text/css" href="css/main.css" />
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	
         <title>G.C Lab</title>
     </head>
     <body>
         <div id="app">
             <div id="home-page" data-role="page">
+			
                 <div data-role="content" >
                     <div id="logoContainer" class="centerText">
                             <img src="img/logo.png" id="logo"  />
                         </div>
                     <div id="menu">
-                        <a data-icon="flat-heart" data-theme="d" href="#second-page" data-role="button">Second Page</a>
-                        <a data-icon="flat-time" data-theme="f" href="#map-page"  data-role="button">Map</a>
-                        <fieldset class="ui-grid-a">
-                            <div class="ui-block-a"> <a data-icon="flat-checkround" data-theme="e" href="#tips-page"  data-role="button">Fake Btn</a></div>
-                            <div class="ui-block-b"><a data-icon="ms-question" data-theme="g" href="#about-page"  data-role="button" >About</a></div>
-                        </fieldset>
-
+					<div class ="row" >
+           
+                        <!-- .row -->
+                        <div class ="col-md-12">
+                            <!-- col-md-8 start here -->
+                            <div class ="row" id="step1">
+                                <!-- .row start -->
+							
+                                <div class ="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                                    <!-- .col-md-3 -->
+                                    <a href="#product-page" title="" class ="stats-btn tipB mb20">
+                                        <i class ="icon icomoon-icon-users"></i>
+                                        <span class ="txt">Produits</span>
+                                        <span class ="notification green">
+                                            <asp:Label ID="lblusrnbr" runat="server" Text="">25</asp:Label>
+                                            
+                                        </span>
+                                    </a>
+                                </div>
+								        <div class ="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                                    <!-- .col-md-3 -->
+                                    <a href="#contrat-page" title="" class ="stats-btn tipB mb20">
+                                        <i class ="icon icomoon-icon-briefcase"></i>
+                                        <span class ="txt">Contrats</span>
+                                        <span class ="notification blue">
+                                            <asp:Label ID="lblusrnbr" runat="server" Text="">10</asp:Label>
+                                            
+                                        </span>
+                                    </a>
+                                </div>
+								        <div class ="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                                    <!-- .col-md-3 -->
+                                    <a href="#map-page" title="" class ="stats-btn tipB mb20">
+                                        <i class ="icon icomoon-icon-map"></i>
+                                        <span class ="txt">Territoires</span>
+                                        <span class ="notification">
+                                            <asp:Label ID="lblusrnbr" runat="server" Text="">1</asp:Label>
+                                            
+                                        </span>
+                                    </a>
+                                </div>
+								        <div class ="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                                    <!-- .col-md-3 -->
+                                    <a href="users.aspx" title="" class ="stats-btn tipB mb20">
+                                        <i class ="icon icomoon-icon-users"></i>
+                                        <span class ="txt">Utilisateurs</span>
+                                        <span class ="notification">
+                                            <asp:Label ID="lblusrnbr" runat="server" Text=""></asp:Label>
+                                            
+                                        </span>
+                                    </a>
+                                </div>
+                         
+                            </div>
+                            <!-- / .row -->
+                        </div>
+                        <!-- col-md-8 end here -->
+                       
+                        <!-- col-md-4 end here -->
+                    </div>
+            
 
                     </div>
                 </div>
@@ -103,7 +160,7 @@
                     <h1>Territoires</h1>
                 </div>
                 <div data-role="content"  class="big-text">
-                    <h2>Privacy Policy</h2>
+                    <h2></h2>
                     <div id="container" style="width: 100%; height: 700px; margin: 0 auto"></div>
                 </div>
             </div>
@@ -123,51 +180,87 @@
 <script>
 
 
-		
-$(function () {
+ $(function () {
 
-   $.getJSON('jsongraph.txt', function (data) {
-    // Initiate the chart
-    $('#container').highcharts('Map', {
+            $.getJSON('jsongraph.txt', function (data) {
 
+            // Prepare demo data
+     
 
-        title : {
-            text : 'Territoires'
-        },
+            // Initiate the chart
+            $('#container').highcharts('Map', {
 
-        subtitle : {
-            text : ''
-        },
+                title: {
+                    text: ''
+                },
 
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
+            
 
-        colorAxis: {
-            min: 0
-        },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'white',
+                    borderWidth: 0,
+                   
+                    shadow: true,
+                    useHTML: true,
+                    padding: 0,
+                    pointFormat: '<span class="f32"><span class="flag {point.flag}"></span></span>'
+                        + ' <b>{point.name}: {point.value} {point.y}Contrats</b> ',
+                    
+                },
+                colorAxis: {
+                    min: 0
+                },
+                plotOptions: {
 
-        series : [{
-            data : data,
-            mapData: Highcharts.maps['custom/africa'],
-            joinBy: 'hc-key',
-            name: 'Random data',
-            states: {
-                hover: {
-                    color: '#BADA55'
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}'
-            }
-        }]
-    });
-});
- })
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function (e) {
+                                    $('#ajax-modal').modal({
+                                        show: true,
+                                        remote: 'detproducts.aspx?tp=MAP&id=' + e.point.code.replace(' ', '_'),
+                                       
+                                    });
+                                  
+                                }
+
+                            }
+                        }
+                    }
+
+                 
+
+                },
+                series: [{
+                    data: data,
+                   
+                    mapData: Highcharts.maps['custom/africa'],
+                    joinBy: 'hc-key',
+                    name: ' ',
+                    states: {
+                        hover: {
+                            color: '#BADA55',
+                            borderWidth: 1,
+                            borderColor:'transparent'
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }]
+            });
+
+        
+            });
+        })
     </script>
         <script type="text/javascript">
             app.initialize();
