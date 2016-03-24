@@ -18,7 +18,8 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
+        navigator.splashscreen.show();
         this.bindEvents();
     },
     // Bind Event Listeners
